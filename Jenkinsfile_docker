@@ -1,0 +1,38 @@
+pipeline {
+    agent { label "maven-build-project"}
+
+    stages {
+        stage('Git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Tejus003/sample-httpd-website.git'
+            }
+        }
+        stage('docker Build') {
+            steps {
+                sh 'docker build -t car villa  .'
+            }
+        }
+        stage('docker tag') {
+            steps {
+                sh 'docker tag car villa teju003/car villa'
+            }
+        }
+        stage('docker run') {
+            steps {
+                //sh 'docker stop little_fashion_conatiner || true'
+                //sh 'docker rm little_fashion_conatiner || true'
+                sh 'docker run -d --name car villa_conatiner -p 80:80 teju003/car villa'
+            }
+        }
+        stage('docker login') {
+            steps {
+                sh 'docker login -u teju003 -p LearnDocker@123'
+            }
+        }
+        stage('docker push') {
+            steps {
+                sh 'docker push teju003/car villa'
+            }
+        }        
+    }
+}
