@@ -19,8 +19,8 @@ pipeline {
         }
         stage('docker run') {
             steps {
-                //sh 'docker stop little_fashion_conatiner || true'
-                //sh 'docker rm little_fashion_conatiner || true'
+                //sh 'docker stop car villa_conatiner || true'
+                //sh 'docker rm car villa_conatiner || true'
                 sh 'docker run -d --name car villa_conatiner -p 80:80 teju003/car villa'
             }
         }
